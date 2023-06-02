@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Schedule App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Secular+One&display=swap" rel="stylesheet">
+  <style>
+    /* CSS styles */
+    body {
+      font-family: 'Secular One', sans-serif;
+      margin: 0;
+      background: linear-gradient(to bottom, #2e3192, #1b1464);
+      color: #fff;
+    }
+    
+    #header {
+      background-color: ;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+    
+    #tabs {
+      display: flex;
+      justify-content: center;
+      background-color: #fff;
+      padding: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+      margin: 20px auto;
+      max-width: 600px;
+    }
+    
+    .tab {
+      margin: 0 10px;
+      cursor: pointer;
+      padding: 8px 15px;
+      background-color: #f1f1f1;
+      border-radius: 4px;
+      color: #333;
+      font-weight: bold;
+      transition: background-color 0.3s;
+      
+    }
+    
+    .tab:hover {
+      background-color: #e0e0e0;
+    }
+    
+    .tab.active {
+      background-color: #ddd;
+    }
+    
+    #calendar {
+      margin: 0 auto;
+      text-align: center;
+      max-width: 600px;
+    }
+    
+    .week {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+    
+    .day {
+      flex: 1;
+      padding: 10px;
+      background-color: #f8fcfb;
+      border-radius: 4px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s;
+      cursor: pointer;
+    }
+    
+    .day:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .date {
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #333;
+    }
+    
+    .content {
+      margin-top: 10px;
+      color: #666;
+    }
+    
+    #clock-in-out {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #6892d5;
+      color: #fff;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    #clock-in-out:hover {
+      background-color: #79d1c3;
+    }
+    
+    #clock-icon {
+      margin-right: 5px;
+    }
+    
+    #dashboard {
+      display: flex;
+      justify-content: center;
+      margin: 20px auto;
+      max-width: 600px;
+    }
+    
+    .dashboard-section {
+      flex: 1;
+      margin: 0 10px;
+      background-color: #f8fcfb;
+      padding: 20px;
+      border-radius: 4px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .dashboard-title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    
+    .dashboard-content {
+      color: #666;
+    }
+    
+    #app-image {
+      max-width: 100%;
+      height: auto;
+      margin-top: 20px;
+      border-radius: 4px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    
+    @media (max-width: 600px) {
+      #calendar, #dashboard {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .week {
+        flex-wrap: wrap;
+      }
+      
+      .day {
+        width: 100%;
+      }
+      
+      #clock-in-out {
+        position: static;
+        margin-top: 20px;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="header">
+    <h1>Schedule</h1>
+  </div>
+  
+  <div id="tabs">
+    <div class="tab active">My Shifts</div>
+    <div class="tab">Available Shifts</div>
+  </div>
+  
+  <div id="calendar">
+    <div class="week">
+      <div class="day">
+        <div class="date">Monday</div>
+        <div class="date">29th</div>
+        <div class="content">
+          <p><strong>Shift:</strong> 7:30am - 5:00pm</p>
+          <p><strong>Position:</strong> Dishwasher</p>
+          <p><strong>Employer:</strong> Denny's</p>
+        </div>
+      </div>
+      <!-- Add other days of the week -->
+    </div>
+  </div>
+  
+  <div id="clock-in-out">
+    <img src="clock_icon.png" alt="Clock Icon" id="clock-icon">
+    <span id="clock-text">Clock In</span>
+  </div>
+  
+  <div id="dashboard">
+    <div class="dashboard-section">
+      <div class="dashboard-title">Upcoming Shifts</div>
+      <div class="dashboard-content">
+        <p><strong>Tuesday:</strong> 9:00am - 1:00pm</p>
+        <p><strong>Wednesday:</strong> 2:00pm - 6:00pm</p>
+        <p><strong>Friday:</strong> 5:00pm - 10:00pm</p>
+      </div>
+    </div>
+    <div class="dashboard-section">
+      <div class="dashboard-title">Notifications</div>
+      <div class="dashboard-content">
+        <p>No new notifications</p>
+      </div>
+    </div>
+  </div>
+  
+  <img src="app_image.png" alt="App Image" id="app-image">
+  
+  <script>
+    // JavaScript functionality (Clock In/Clock Out)
+    var clockInOutButton = document.getElementById('clock-in-out');
+    var clockText = document.getElementById('clock-text');
+    
+    var isClockedIn = false;
+    
+    clockInOutButton.addEventListener('click', function() {
+      if (isClockedIn) {
+        clockText.innerText = 'Clock In';
+        isClockedIn = false;
+        // Perform clock out functionality here
+      } else {
+        clockText.innerText = 'Clock Out';
+        isClockedIn = true;
+        // Perform clock in functionality here
+      }
+    });
+  </script>
+</body>
+</html>
